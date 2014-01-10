@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery-ui-1.8.21.custom.min.js" type="text/javascript"></script>
+<script src="jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+<script src="raphael-min.js" type="text/javascript"></script>
+
+<script src="g.raphael.js" type="text/javascript"></script>
+<script src="g.line.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="http://beta.images.theglobeandmail.com/media/www/css/global.fonts.css">
+<link rel="stylesheet" type="text/css" href="ui-lightness/jquery-ui-1.8.21.custom.css" />
+<style type="text/css">
+a{outline:none;}
+body {
+    background: white;
+    color: #333;
+    font: normal normal 12px/1.5 Verdana, Helvetica, Arial, sans-serif;
+}
+#gi{
+	width:940px;
+	margin:0 auto;
+	position: relative;
+}
+#holder-container{
+	float:right;
+	width:637px;
+	position:relative;
+	height:565px;
+	z-index:15;
+	margin-top:-65px;
+}
+#holder {
+    height: 565px;
+    width: 640px;
+    float:left;
+}
+#holder-all-ex{
+	float:right;
+	padding-left:10px;
+	display:none;
+}
+#gi-header-all{
+	width:100%;
+	float:left;
+	clear:both;
+	margin:0 0 20px 0;
+}
+h1.gi-header{
+	font-family:"PrattRegular",Arial,Helvetica,sans-serif;
+	font-size:28px;
+	margin: 8px 0;
+	font-weight:normal;
+}
+h1.gi-header span{
+	font-family:"PrattHeavy";
+	color:#438da5;
+}
+.input-wrap{
+	float:left;
+}
+.input-box{
+	border:1px solid #d6d6d6;
+	padding:3px;
+	float:left;
+}
+.input-box input{
+	font-family:"PrattRegular",Arial,Helvetica,sans-serif;
+	font-size:24px;
+	border:0;
+	padding:3px 8px;
+	width:150px;
+	outline:none;
+	color:#B8B8B8;
+}
+.input-submit{
+	float:left;
+}
+.input-submit a{
+display: block;
+padding: 7px 11px;
+color: white;
+background-color: #D60000;
+font-family: "PrattHeavy",Arial,Helvetica,sans-serif;
+font-size: 19px;
+text-transform: uppercase;
+text-decoration: none;
+}
+.input-response{
+font-family: "PrattRegular",Verdana,sans-serif;
+font-size: 15px;
+line-height: 2.7;
+float: left;
+width: 400px;
+margin-left: 16px;
+display:none;
+}
+.linechart{
+height: 250px;
+width: 557px;
+float: left;
+margin-left: 75px;
+}
+#copy {
+    bottom: 0;
+    font: 300 .7em "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+    position: absolute;
+    right: 1em;
+    text-align: right;
+}
+#copy a {
+    color: #333;
+}
+.holder-nav{
+	position:absolute;
+	z-index:1;
+}
+.holder-nav span{
+	font-weight:bold;
+}
+.tale{
+	width:290px;
+	float:left;
+	margin-right:10px;
+}
+.slider-year{
+text-align: center;
+float: left;
+padding-right: 15px;
+font-size: 15px;
+position: absolute;
+}
+.slider-container{
+padding: 10px 0;
+width: 280px;
+margin:0 auto;
+float:left;
+font-family: 'PrattHeavy',Helvetica,Tahoma,sans-serif;
+}
+#slider {
+width: 225px;
+float: right;
+margin-top: 5px;
+margin-right:5px;
+	}
+#slider .year{
+	font-size:12px;
+	float:left;
+}
+.slider-tip div{
+	background-image:url('up.png');
+	background-repeat:no-repeat;
+	background-position:0 50%;
+	text-indent:15px;
+}
+table{
+	width:100%;
+  border-spacing:0;
+  border-collapse:collapse;
+}
+table tr td{
+	padding:10px 0;
+	border-bottom:1px solid #ececec;
+	text-align:right;
+	text-transform: uppercase;
+}
+table tr td:first-child{
+	text-align:left;
+	text-transform: none;
+}
+#year-header{
+	font-weight:bold;
+}
+.y{
+	text-align:center;
+	text-transform: uppercase;
+	font-size:12px;
+	width:30px;
+	padding:10px 25px;
+}
+.compare{
+	float:left;
+	width:200px;
+	padding:10px;
+	height:130px;
+	margin:0 0 20px 17px;
+	background-color:#f5f5f5;
+	border:1px solid #e4e4e4;
+}
+.tale-footer .compare:first-child{
+	margin-left:0;
+}
+.compare h2{
+	font-family:'PrattHeavy',Helvetica,Arial,Tahoma,sans-serif;
+	font-size:15px;
+	margin:0;
+	font-weight:normal;
+}
+.compare h3{
+	font-family:'PrattRegular',Helvetica,Arial,Tahoma,sans-serif;
+	font-size:12px;
+	margin:0;
+}
+.before{
+	border-top:1px solid #ececec;
+}
+.before,.after{
+	position: relative;
+	width:100%;
+	height:20px;
+	clear:both;
+	margin:5px 0;
+}
+.label{
+float: left;
+text-transform: uppercase;
+letter-spacing: 1;
+width: 33px;
+text-align: right;
+margin-right: 5px;
+font-size: 12px;
+color:#909090;
+font-family:"PrattHeavy",Helvetica,Arial,Tahoma,sans-serif;
+height: 22px;
+margin-top: 13px;
+}
+.bar{
+float: left;
+position: relative;
+width: 150px;
+height: 22px;
+background-color: #659fb7;
+font-size: 13px;
+font-weight: bold;
+color: white;
+padding: 3px;
+margin: 5px 0;
+z-index: 10;
+overflow:hidden;
+}
+.shadowbar{
+float: left;
+position: absolute;
+left:38px;
+width: 240px;
+height: 20px;
+font-size: 13px;
+font-weight: bold;
+color: #949494;
+padding: 3px;
+margin: 5px 0;
+z-index: 5;
+}
+#gi h2{
+	font-family:'PrattHeavy',Helvetica,Tahoma,sans-serif;
+	font-size:22px;
+	font-weight:normal;
+	margin-bottom:0;
+	position: relative;
+}
+#nav{
+	font-family: 'PrattHeavy',Helvetica,Arial,sans-serif;
+	width: 940px;
+	height: 40px;
+}
+.tab{
+	float:left;
+	border:1px solid #d0d0d0;
+	border-left:none;
+	text-align:center;
+	font-size:12px;
+	text-transform:uppercase;
+	min-width:40px;
+}
+#nav .tab:first-child{
+	border-left:1px solid #d0d0d0;
+}
+.tab a{
+	color:#333;
+	padding:10px 16px 5px 16px;
+	display:block;
+	height:20px;
+	background-color:#f0f0f0;
+}
+.tab a{
+	text-decoration:none;
+	outline:none;
+}
+.tab a:hover{
+	background-color:#f9f9f9;
+}
+.tab a.selected{
+	background-color:#f9f9f9;
+}
+
+.slide{
+	float:left;
+	clear:both;
+}
+.slide.selected{
+	display:block;
+}
+
+.holder-nav{
+margin: 0 auto;
+padding: 3px;
+text-align: center;
+position: absolute;
+max-width: 76px;
+font-size: 10px;
+color:#747474;
+}
+#nav-top{
+top: 0;
+left: 50%;
+margin-left: -50px;
+margin-top: 47px;
+}
+#nav-right{
+top: 50%;
+right: 0;
+margin-right: 58px;
+margin-top: -22px;
+}
+#nav-bottom{
+top: 100%;
+margin-top: -82px;
+left: 47.5%;
+margin-left: -39px;
+max-width: 85px !important;
+}
+#nav-left{
+top: 50%;
+margin-top: -25px;
+left: 0;
+margin-left: 48px;
+}
+#blob-legend{
+position: absolute;
+right: 10px;
+top: 40px;
+width: 100px;
+line-height: 2;
+font-size: 11px;
+}
+.legend-square{
+	float:left;
+	margin:5px 0;
+	width:100px;
+}
+#mainblob-legend{
+	width:20px;
+	height:20px;
+	background-color:#daeaf3;
+	border:1px solid #b6d7e2;
+	float:left;
+	margin-right:5px;
+}
+#underblob-legend{
+	width:20px;
+	float:left;
+	height:20px;
+	background-color:#e7e7e7;
+	border:1px solid #cccccc;
+	margin-right:5px;
+}
+#label{
+	position: absolute;
+	width:200px !important;
+	font-size:9.5px !important;
+	font-family:Verdana,Helvetica,sans-serif !important;
+	border:1px solid #ececec !important;
+	line-height:1.5;
+	padding:10px;
+	background-color:white;
+	box-shadow: 4px 4px 4px #eee;
+	-moz-box-shadow: 4px 4px 4px #eee;
+	-webkit-box-shadow: 4px 4px 4px #eee;
+}
+
+/* Smartphones -------------------------------*/
+@media screen and (max-width: 480px) {
+	#gi,#gi .slide, #holder-container,.tale,.linechart,.slider-container{
+		clear:both;
+		float:left;
+		width:100%;
+		margin-left:0;
+	}
+	#slider,#slider-all{
+		width:80%;
+	}
+	#nav-top {
+		top: 0;
+		left: 50%;
+		margin-left: -32px;
+		margin-top: 0;
+	}
+	#nav-right {
+		top: 50%;
+		right: 0;
+		margin-right: 0;
+		margin-top: -28px;
+	}
+	#nav-left{
+		top: 50%;
+		margin-top: -28px;
+		left: 0;
+		margin-left: -9px;
+	}
+	#holder{
+		height:420px;
+	}
+	#holder-container{
+		height:100%;
+	}
+	#nav-bottom{
+		left:50%;
+		bottom:0;
+	}
+	#blob-legend{
+		top:0;
+		right:0;
+		width:71px;
+	}
+
+#gi-headline,#gi-timemachine, .gi-text,#teaser .slider-container{
+	width:90% !important;
+	float:left !important;
+	clear:both;
+	margin:0 !important;
+}
+#holder-container{
+margin-top:0;
+}
+
+}
+</style>
+<script type="text/javascript">
+$('document').ready(function(){
+
+    var storeVal = [],
+    	time = 1000;
+	
+    var income = [ // updated March 11, 2013
+23400,24500,23200,23600,22300,22700,19300,16600,17300,17000,17800,17600,18000,19800,16300,15500,14200,13600,13200,12900,12200,12000,12700,13500,13500,13900,13900,13400,13700,14000,14300,14200,14200,13700,13800
+    ],
+
+    tuition = [ //adjusted 2010
+537.83,588.37,597.91,669.43,669.43,727.6,822.96,865.87,931.67,971.72,1013.68,1084.25,1130.02,1212.03,1396.08,1626.85,1785.15,1929.14,2117.95,2273.39,2525.14,2735.89,2921.84,3173.59,3287.07,3411.04,3538.82,3790.58,3948.87,4015.63,4145.32,4195.86,4346.53,4526.76,4712.71,4899.62
+    ],
+    interestMortgage = [ //updated
+      11.780833333333334,
+      10.3575,
+      10.594166666666666,
+      11.975000000000001,
+      14.316666666666665,
+      18.150000000000002,
+      17.888333333333335,
+      13.293333333333335,
+      13.608333333333334,
+      12.18083333333333,
+      11.224166666666667,
+      11.140833333333333,
+      11.601666666666667,
+      12.0525,
+      13.244166666666667,
+      11.156666666666666,
+      9.52,
+      8.703333333333333,
+      9.341666666666667,
+      9.218333333333334,
+      7.940000000000001,
+      7.0683333333333325,
+      6.904166666666666,
+      7.386666666666667,
+      8.195833333333333,
+      7.177499999999999,
+      6.695833333333334,
+      6.036666666666666,
+      5.796666666666667,
+      5.479166666666667,
+      5.979166666666667,
+      6.3549999999999995,
+      6.405,
+      5.053333333333334,
+      4.815,
+    ],
+    incomeTax = [ // where's this from?
+      50.9,
+      50.9,
+      43.2,
+      43.2,
+      43.2,
+      46.08,
+      36,
+      36.75,
+      36.75,
+      36.75,
+      36.75,
+      37.5,
+      37.5,
+      26.18,
+      26.36,
+      26.69,
+      26.61,
+      26.35,
+      26.35,
+      26.35,
+      26.35,
+      26.35,
+      26.35,
+      26.1,
+      25.84,
+      24.32,
+      24.32,
+      24.32,
+      24.32,
+      23.68,
+      22.57,
+      22.2,
+      22.2,
+      22.2,
+      0,
+      0
+    ],
+    housing = [ // adjusted
+192999.53,
+181572.04,
+179424.83,
+178139.15,
+184556.52,
+186567.53,
+159686.92,
+156377.10,
+147434.22,
+149753.12,
+168015.62,
+189014.81,
+214163.61,
+232677.74,
+213070.06,
+208462.94,
+207055.64,
+207035.11,
+211091.53,
+200321.85,
+197352.03,
+197943.83,
+192928.62,
+198934.31,
+202383.96,
+205776.81,
+222798.69,
+234268.00,
+252641.71,
+272464.55,
+294928.33,
+323117.47,
+314024.30,
+326402.21,
+339199.59,
+354575.42
+    ],
+    unemployment = //updated
+	 [
+      7.1,
+      8,
+      8.4,
+      7.5,
+      7.5,
+      7.6,
+      11,
+      12,
+      11.3,
+      10.5,
+      9.6,
+      8.8,
+      7.8,
+      7.5,
+      8.1,
+      10.3,
+      11.2,
+      11.4,
+      10.4,
+      9.5,
+      9.6,
+      9.1,
+      8.3,
+      7.6,
+      6.8,
+      7.2,
+      7.7,
+      7.6,
+      7.2,
+      6.8,
+      6.3,
+      6,
+      6.1,
+      8.3,
+      8,
+      7.4
+    ],
+    csl = // Adjusted
+    [
+4338.09,
+4192.93,
+3961.28,
+3640.30,
+3477.78,
+3541.35,
+3583.09,
+4724.19,
+4909.13,
+4943.52,
+4739.83,
+4727.69,
+4480.15,
+4412.43,
+4153.80,
+4170.27,
+4159.08,
+4381.92,
+5144.07,
+5494.50,
+6036.21,
+5722.99,
+5862.63,
+5816.64,
+5606.05,
+5481.29,
+5536.83,
+5450.32,
+5380.62,
+6155.06,
+5972.01,
+6003.30,
+5854.86,
+5282.38,
+5226.20,
+5106.22
+   ],
+   inflation = [
+   31.133333333333336,
+   33.61666666666666,
+   36.63333333333333,
+   39.983333333333334,
+   44.03333333333333,
+   49.525,
+   54.85833333333334,
+   58.075,
+   60.575,
+   62.975,
+   65.61666666666666,
+   68.475,
+   71.23333333333333,
+   74.78333333333333,
+   78.35833333333333,
+   82.76666666666667,
+   84,
+   85.56666666666666,
+   85.70833333333333,
+   87.55,
+   88.925,
+   90.36666666666667,
+   91.26666666666667,
+   92.85,
+   95.375,
+   97.78333333333335,
+   99.99166666666667,
+   102.75,
+   104.65833333333335,
+   106.975,
+   109.11666666666667,
+   111.45,
+   114.09166666666665,
+   114.43333333333334,
+   116.46666666666668,
+	119.85833333333333 // 2011
+   ],
+   minimumWage = [
+   2.9,
+   2.9,
+   2.9,
+   2.9,
+   3.25,
+   3.5,
+   3.5,
+   3.5,
+   3.5,
+   3.5,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   7.940000000000001,
+   7.0683333333333325,
+   6.904166666666666,
+   7.386666666666667,
+   8.195833333333333,
+   7.177499999999999,
+   6.695833333333334,
+   6.036666666666666,
+   5.796666666666667,
+   5.479166666666667,
+   5.979166666666667,
+   6.3549999999999995,
+   6.405,
+   5.053333333333334,
+   4.815,
+   4.569166666666668
+   ];
+   
+   	$('.slide h2 a').hover(function(e){
+		var c = $(this).children('img').attr('alt');
+		$('body').parent().append('<div id="label">' + c + '</div>');
+		$('#label').css({'left':e.pageX+20,'top':e.pageY-parseInt($('#label').height())/2});
+	},function(){
+		$('#label').remove();
+	})
+	$('.slide h2 a').click(function(e){
+		var c = $(this).children('img').attr('alt');
+		$('body').parent().append('<div id="label">' + c + '</div>');
+		$('#label').remove();
+		$('#label').css({'left':e.pageX+20,'top':e.pageY-parseInt($('#label').height())/2});
+		return false;
+	})
+    
+var addCommas = function(n) {
+ var s = n.toFixed(2).replace('.00', '');
+ var digits = (Math.floor(n) + '').length;
+ for (var i = 0, j = 0, mod = digits % 3; i < digits; i++) {
+  if (i == 0 || i % 3 != mod) {
+   continue;
+  }
+  s = s.substr(0, i + j) + ',' + s.substr(i + j);
+  j++;
+ }
+ return s;
+};
+var scale = function(num,arr){
+    	return(((num - Math.min.apply( Math, arr )) * (100/(Math.max.apply( Math, arr ) - Math.min.apply( Math, arr ))))*.1);
+    }
+    
+Raphael.fn.donutChart = function (cx, cy, r, rin, values, labels, stroke) {
+
+
+// Set up default label values surrounding blob
+			//Income val
+			$('.slider-income-val').text('$' + addCommas(Math.round(income[0])));
+			
+			//Mortagage val
+			$('.slider-mortgage-val').text('$' +  addCommas(Math.round(housing[0])));
+						
+			//Income tax val
+			$('.slider-incometax-val').text('$' + addCommas(Math.round(csl[0])));
+						
+			//Tuition val
+			$('.slider-tuition-val').text('$' +  addCommas(Math.round(tuition[0])));
+			
+			
+    var paper = this,
+        rad = Math.PI / 180,
+        chart = this.set(),
+        dataPoints = [],
+        dataVals = [],
+		blob,
+   		blobs = [],
+    	blobCount = 0,
+    	scaling = 1.5,
+    	curve = 40;
+	    
+	// 2011 labels
+//	paper.text(cx-100,cy-100,"2011").attr('fill','#b0b0b0');
+//	paper.path(["M",cx-90,cy-90,"L",cx-80,cy-80]).rotate(.4).attr({'stroke':'#b0b0b0','stroke-dasharray':'-  -'});
+//	paper.circle(cx-90,cy-90,1).attr({'fill':'#b0b0b0','stroke':'#b0b0b0'});
+	
+	// Circle border
+	/*var outerCircle = paper.circle(cx,cy,r+10).attr({'fill':'120-#d4d4d4-#fff','stroke':'#ececec'});
+	paper.circle(cx,cy,r-10).attr({'fill':'#f7f7f7','stroke':'#ececec','stroke-width':3});
+*/
+	// Radial rings
+/*	var i = 0,
+		hashR = 0;
+	while(i<10){
+		i++
+		hashR += 19
+		paper.circle(cx,cy,hashR).attr({'stroke':'#ececec','stroke-width':1});
+	}
+	
+*/	// Axes
+	paper.path(["M",cx-190,cy,"L",cx+190,cy]).attr({"stroke":'#b0b0b0',"stroke-width":.5});
+	paper.path(["M",cx,cy-190,"L",cx,cy+190]).attr({"stroke":'#b0b0b0',"stroke-width":.5});
+//	paper.path(["M",cx,cy,"L",cx-r,cy-r]).attr("stroke",'#b0b0b0').rotate(.45);
+	
+	function openCircle(){
+		outerCircle.animate({
+				'r':r+30
+			},100)
+	}
+	function closeCircle(){
+			outerCircle.animate({
+				'r':r+10
+			},100)
+	}
+	// Change scale of any array so highest is 100 and lowest is 0
+    scale = function(num,arr){
+    	return(((num - Math.min.apply( Math, arr )) * (100/(Math.max.apply( Math, arr ) - Math.min.apply( Math, arr ))))*scaling)+50;
+    }
+        		
+	// Hashmarks
+	/*
+	var hashStartY = cy+r,
+		hashStartX = cx+r,
+		hashD = 10,
+		hashL = 10,
+		hashS = 0;
+	for(j=0;j<90;j++){
+			hashS += 20;
+			paper.path([
+				"M",cx-hashL,hashStartY-hashS,
+				"L",cx+hashL,hashStartY-hashS
+			]).attr("stroke",'#b0b0b0');
+	}
+	hashS = 0;
+	for(j=0;j<90;j++){
+			hashS += 20;
+			paper.path([
+				"M",hashStartX-hashS,cy-hashL,
+				"L",hashStartX-hashS,cy+hashL
+			]).attr("stroke",'#b0b0b0');
+	}
+	*/
+   	// Prepare data
+   	  $.each(income, function(i, inc){
+		// The first four points go into the blob
+		dataPoints.push({
+			data: [
+				scale(inc,income),
+				scale(housing[i],housing),
+				scale(csl[i],csl),
+				scale(tuition[i],tuition),
+				scale(interestMortgage[i], interestMortgage),
+				scale(unemployment[i],unemployment),
+				scale(inflation[i],inflation),
+				scale(incomeTax[i],incomeTax),//scale(incomeTax[i],incomeTax),
+				]
+		});
+		// Actual data values for legend
+		dataVals.push({
+			data: [
+				'$' + inc,
+				'$' + Math.round(housing[i]),
+				'$' + csl[i],
+				'$' + Math.round(tuition[i]),
+				interestMortgage[i] + '%',
+				unemployment[i] + '%'
+				]
+		})
+		//createBlob(dataPoints[dataPoints.length-1].data);
+	  });
+	
+	var dataPos = [0,1,2,3];
+
+    /* 
+    	Calculations for four quadrants
+    	
+    	x1 = cx       |   y1 = cy - V
+    	x2 = cx + V   |   y2 = cy
+    	x3 = cx       |   y3 = cy + V
+    	x4 = cx - V   |   y4 = cy
+    	x5 = cx - V   |   y5 = cy - V
+    */        
+    // Manifest the blob
+	/*
+	-- With five values -- 
+	"M",cx,cy-vals[0],
+    			"C",cx+curve,cy-vals[0],cx+vals[1],cy-curve,cx+vals[1],cy,
+    			"C",cx+vals[1],cy+curve,cx+curve,cy+vals[2],cx,cy+vals[2],
+    			"C",cx-curve,cy+vals[2],cx-vals[3],cy+curve,cx-vals[3],cy,
+    			"C",cx-vals[3],cy-curve,cx-vals[4]-curve,cy-vals[4],cx-vals[4],cy-vals[4],
+    			"C",cx-vals[4]+curve,cy-vals[4]-curve,cx-curve,cy-vals[0],cx,cy-vals[0]
+	*/
+	
+	var c1,c2,c3,c4,t1,t2,t3,t4; // dots and text variables
+	
+	var blobInit;
+    function createBlob(vals,fill,opacity){
+		if(blobs.length < 1) {
+		// Create the under blob
+		blob = paper.path([
+				"M",cx,cy-vals[0],
+    			"C",cx+curve,cy-vals[0],cx+vals[1],cy-curve,cx+vals[1],cy,
+    			"C",cx+vals[1],cy+curve,cx+curve,cy+vals[2],cx,cy+vals[2],
+    			"C",cx-curve,cy+vals[2],cx-vals[3],cy+curve,cx-vals[3],cy,
+    			"C",cx-vals[3],cy-curve,cx-curve,cy-vals[0],cx,cy-vals[0]
+			  ]).attr({'fill':fill,'opacity':0,'stroke':'#939393'}).animate({'opacity':opacity},250);
+		} else {
+		// Create the over blob
+		blob = paper.path([
+				"M",cx,cy-vals[0],
+    			"C",cx+curve,cy-vals[0],cx+vals[1],cy-curve,cx+vals[1],cy,
+    			"C",cx+vals[1],cy+curve,cx+curve,cy+vals[2],cx,cy+vals[2],
+    			"C",cx-curve,cy+vals[2],cx-vals[3],cy+curve,cx-vals[3],cy,
+    			"C",cx-vals[3],cy-curve,cx-curve,cy-vals[0],cx,cy-vals[0]
+    		]).attr('opacity','0').animate({opacity:opacity},250).attr({'fill':fill,'opacity':opacity,'stroke':'#57a2b9'});
+		}
+		// If main blob, add circles and text
+		var fill='white';
+/*		// Circles
+		 c1 = paper.circle(cx,cy-vals[0],2).attr({'fill':fill,'opacity':0,'stroke':'#b0b0b0'}),
+		 c2 = paper.circle(cx+vals[1],cy,2).attr({'fill':fill,'opacity':0,'stroke':'#b0b0b0'}),
+		 c3 = paper.circle(cx,cy+vals[2],2).attr({'fill':fill,'opacity':0,'stroke':'#b0b0b0'}),
+		 c4 = paper.circle(cx-vals[3],cy,2).attr({'fill':fill,'opacity':0,'stroke':'#b0b0b0'}),
+		// Text
+		 t1 = paper.text(cx,cy-vals[0]-10,dataVals[0].data[0]).attr('opacity',0),
+		 t2 = paper.text(cx+vals[1],cy-10,dataVals[1].data[1]).attr('opacity',0),
+		 t3 = paper.text(cx,cy+vals[2]+10,dataVals[2].data[2]).attr('opacity',0),
+		 t4 = paper.text(cx-vals[3],cy-10,dataVals[3].data[3]).attr('opacity',0),
+		
+		// Bounding box vars
+		 t1B = t1.getBBox(),
+		 t2B = t2.getBBox(),
+		 t3B = t3.getBBox(),
+		 t4B = t4.getBBox();
+
+		// White rects
+		 b1 = paper.rect(t1B.x-2,t1B.y-2,t1B.width+4,t1B.height+4).attr({'fill':'white','stroke':'#ececec','opacity':0});
+		 b2 = paper.rect(t2B.x-2,t2B.y-2,t2B.width+4,t2B.height+4).attr({'fill':'white','stroke':'#ececec','opacity':0});
+		 b3 = paper.rect(t3B.x-2,t3B.y-2,t3B.width+4,t3B.height+4).attr({'fill':'white','stroke':'#ececec','opacity':0});
+		 b4 = paper.rect(t4B.x-2,t4B.y-2,t4B.width+4,t4B.height+4).attr({'fill':'white','stroke':'#ececec','opacity':0});
+		 
+		 t1.toFront();
+		 t2.toFront();
+		 t3.toFront();
+		 t4.toFront();
+		 
+		 c1.hover(function(){ t1.attr('opacity',1) }, function(){ t1.attr('opacity',0)});
+		 c2.hover(function(){ t2.attr('opacity',1) }, function(){ t2.attr('opacity',0)});
+		 c3.hover(function(){ t3.attr('opacity',1) }, function(){ t3.attr('opacity',0)});
+		 c4.hover(function(){ t4.attr('opacity',1) }, function(){ t4.attr('opacity',0)});
+		 var t = [t1,t2,t3,t4];
+		 var c = [c1,c2,c3,c4];
+		 var b = [b1,b2,b3,b4];
+		// Show values on hover
+	*/
+	/*	blob.hover(function(){
+			openCircle();
+			$.each(c, function(i,cc){
+				cc.attr('opacity','1').toFront();
+			})
+			$.each(b, function(i, bb){
+				bb.attr('opacity','1').toFront();
+			})
+			$.each(t, function(i, tt){
+				tt.attr('opacity','1').toFront();
+			})
+			this.stop().animate({'opacity':.8},250)
+		}, function(){
+			closeCircle();
+			$.each(c, function(i, cc){
+				cc.attr('opacity','0').toFront();
+			})
+			$.each(b, function(i, bb){
+				bb.attr('opacity','0').toFront();
+			})
+			$.each(t, function(i, tt){
+				tt.attr('opacity','0').toFront();
+			})
+			this.stop().animate({'opacity':opacity},250)
+		})
+		*/
+		blobs.push(blob);
+    }
+    // Create underlay blob
+    createBlob(dataPoints[0].data,'#d7d7d7',.4)
+
+	// Create main blob
+	createBlob(dataPoints[0].data,'#c2dceb',.6)
+
+	// Redraw the blob
+	function animateBlob(dataPos,val,ms,animation){
+		var vals = [
+			dataPoints[val-1976].data[dataPos[0]],
+			dataPoints[val-1976].data[dataPos[1]],
+			dataPoints[val-1976].data[dataPos[2]],
+			dataPoints[val-1976].data[dataPos[3]]
+		]; 
+		var newPath = [
+				"M",cx,cy-vals[0],
+    			"C",cx+curve,cy-vals[0],cx+vals[1],cy-curve,cx+vals[1],cy,
+    			"C",cx+vals[1],cy+curve,cx+curve,cy+vals[2],cx,cy+vals[2],
+    			"C",cx-curve,cy+vals[2],cx-vals[3],cy+curve,cx-vals[3],cy,
+    			"C",cx-vals[3],cy-curve,cx-curve,cy-vals[0],cx,cy-vals[0]
+    	];
+		blob.animate({path:newPath},ms,animation);
+		fill = 'white';
+	/*	c1.attr({cx:cx,cy:cy-vals[0]});
+		c2.attr({cx:cx+vals[1],cy:cy});
+		c3.attr({cx:cx,cy:cy+vals[2]});
+		c4.attr({cx:cx-vals[3],cy:cy});
+		t1.attr({x:cx,y:cy-vals[0]-10,text:dataVals[val-1976].data[dataPos[0]]});
+		t2.attr({x:cx+vals[1],y:cy-10,text:dataVals[val-1976].data[dataPos[1]]});
+		t3.attr({x:cx,y:cy+vals[2]+10,text:dataVals[val-1976].data[dataPos[2]]});
+		t4.attr({x:cx-vals[3],y:cy-10,text:dataVals[val-1976].data[dataPos[3]]});
+		 t1B = t1.getBBox(),
+		 t2B = t2.getBBox(),
+		 t3B = t3.getBBox(),
+		 t4B = t4.getBBox();
+ 		 b1.attr({x:t1B.x-2,y:t1B.y-2,width:t1B.width+4,height:t1B.height+4});
+ 		 b2.attr({x:t2B.x-2,y:t2B.y-2,width:t2B.width+4,height:t2B.height+4});
+ 		 b3.attr({x:t3B.x-2,y:t3B.y-2,width:t3B.width+4,height:t3B.height+4});
+ 		 b4.attr({x:t4B.x-2,y:t4B.y-2,width:t4B.width+4,height:t4B.height+4});
+	*/
+	}
+
+
+/* -- Controls -- */
+	$('.tab').click(function(){
+		var thisChange = $(this).index();
+		$('.slide.selected').toggleClass('selected');
+		$('.slide').eq(thisChange).toggleClass('selected');
+		$('.tab a.selected').toggleClass('selected');
+		$(this).find('a').toggleClass('selected');
+		return false;
+	})
+	$('#change').click(function(){
+		dataPos = [0,1,4,3];
+		animateBlob(dataPos,year,250,'elastic');
+	})
+	var sliderTip = true,
+		barScale = .6;
+		
+	var onceStop = true;
+	$('#slider').slider({
+		'max':2010,
+		'value':2010,
+		'min':1976,
+		slide: function(event, ui){
+			manageSlider(event, ui, $('#slider-all'))
+			var y = ui.value;
+			var inc = income[ui.value-1976];
+			var hou = housing[ui.value-1976];
+			var loa = csl[ui.value-1976];
+			var tui = tuition[ui.value-1976];
+			var countWorse = 0;
+			if(ui.value == 1976){
+				$('#income-updown').css('color','gray').text('You had the same');
+				$('#housing-updown').css('color','gray').text('You had the same');
+				$('#loan-updown').css('color','gray').text('You had the same');			
+				$('#tuition-updown').css('color','gray').text('You had the same');			
+				$('.worsebetter').text('the same as');
+			} else {
+			if(income[0] > inc){
+				countWorse++;
+				$('#income-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#income-updown').css('color','green').text('You had it better');			
+			}
+			if(housing[0] < hou){
+				countWorse++;
+				$('#housing-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#housing-updown').css('color','green').text('You had it better');			
+			}
+			if(csl[0] < loa){
+				countWorse++;
+				$('#loan-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#loan-updown').css('color','green').text('You had it better');			
+			}
+			if(tuition[0] < tui){
+				countWorse++;
+				$('#tuition-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#tuition-updown').css('color','green').text('You had it better');			
+			}
+			if(countWorse > 1){
+				$('.worsebetter').text('worse than');
+			} else {
+				$('.worsebetter').text('better than');
+			}
+			
+			}
+			
+			//animateLines(parseInt(ui.value)-1976)
+
+		}
+	});
+	$('#slider-all').slider({
+		'max':2010,
+		'value':2010,
+		'min':1976,
+		slide: function(event,ui){
+			manageSlider(event, ui, $('#slider'));
+			var y = ui.value;
+			var yrs = ui.value.toString().split('');
+			$('.slider-tic-val div').each(function(i){
+				$(this).text(yrs[i]);
+			});
+			var inc = income[ui.value-1976];
+			var hou = housing[ui.value-1976];
+			var loa = csl[ui.value-1976];
+			var tui = tuition[ui.value-1976];
+			var countWorse = 0;
+			if(ui.value == 1976){
+				$('#income-updown').css('color','gray').text('You had the same');
+				$('#housing-updown').css('color','gray').text('You had the same');
+				$('#loan-updown').css('color','gray').text('You had the same');			
+				$('#tuition-updown').css('color','gray').text('You had the same');			
+				$('.worsebetter').text('the same as');
+			} else {
+			if(income[0] > inc){
+				countWorse++;
+				$('#income-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#income-updown').css('color','green').text('You had it better');			
+			}
+			if(housing[0] < hou){
+				countWorse++;
+				$('#housing-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#housing-updown').css('color','green').text('You had it better');			
+			}
+			if(csl[0] < loa){
+				countWorse++;
+				$('#loan-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#loan-updown').css('color','green').text('You had it better');			
+			}
+			if(tuition[0] < tui){
+				countWorse++;
+				$('#tuition-updown').css('color','red').text('You had it worse');
+			} else {
+				$('#tuition-updown').css('color','green').text('You had it better');			
+			}
+			if(countWorse > 1) {
+				$('.worsebetter').text('worse than');
+			} else {
+				$('.worsebetter').text('better than');
+			}
+			
+			}
+		}
+	});
+	function manageSlider(event, ui, obj){
+		/*	if(sliderTip){
+				setTimeout(function(){
+					$('.slider-tip').slideUp(function(){
+						$(this).hide();
+					})
+				},200);
+				sliderTip = false;
+			} */
+			obj.slider('value',ui.value);
+			animateBlob(dataPos, ui.value,100,'');
+			$('.before .label').text(ui.value);
+			year = ui.value;
+			$('.slider-year-val').text(ui.value);
+/*			$('#compare-val-1').find('.bar.val1').stop().animate({'width':scale(Math.round(income[ui.value-1976])*barScale,income)+10},100).text('$' + income[ui.value-1976]);
+			$('#compare-val-1').find('.shadowbar.val1').text('$' + Math.round(income[ui.value-1976]));
+
+			$('#compare-val-2').find('.bar.val1').stop().animate({'width':scale(Math.round(housing[ui.value-1976])*barScale,housing)+10},100).text('$' + Math.round(housing[ui.value-1976]));
+			$('#compare-val-2').find('.shadowbar.val1').text('$' + Math.round(housing[ui.value-1976]));
+
+			$('#compare-val-3').find('.bar.val1').stop().animate({'width':incomeTax[ui.value-1976]*scaling},100).text(incomeTax[ui.value-1976] + '%');
+			$('#compare-val-3').find('.shadowbar.val1').text(incomeTax[ui.value-1976] + '%');
+
+			$('#compare-val-4').find('.bar.val1').stop().animate({'width':scale(tuition[ui.value-1976],tuition)*barScale},100).text('$' + Math.round(tuition[ui.value-1976]));
+			$('#compare-val-4').find('.shadowbar.val1').text('$' + Math.round(tuition[ui.value-1976]));
+			
+			$('#compare-val-5').find('.bar.val1').stop().animate({'width':scale(unemployment[ui.value-1976],unemployment)*barScale},100).text(Math.round(unemployment[ui.value-1976]) + '%');
+			$('#compare-val-4').find('.shadowbar.val1').text(Math.round(unemployment[ui.value-1976]) + '%');
+			
+			$('#compare-val-6').find('.bar.val1').stop().animate({'width':scale(studentDebt[ui.value-1976],studentDebt)*barScale},100).text('$' + Math.round(studentDebt[ui.value-1976]));
+			$('#compare-val-4').find('.shadowbar.val1').text('$' + Math.round(studentDebt[ui.value-1976]));
+	*/
+			//1. Income val
+			$('.slider-income-val').text('$' +  addCommas(Math.round(income[ui.value-1976])));
+	
+			//2. Mortagage val
+			$('.slider-mortgage-val').text('$' +  addCommas(Math.round(housing[ui.value-1976])));
+						
+			//3. Income tax val
+			$('.slider-incometax-val').text('$' + addCommas(Math.round(csl[ui.value-1976])));
+						
+			//4. Tuition val
+			$('.slider-tuition-val').text('$' +  addCommas(Math.round(tuition[ui.value-1976])));
+			
+		}
+
+	/* -- All year -- */
+/*	var allYearsEx = Raphael("holder-all-ex",200,200);
+	var ex = 125;
+	allYearsEx.path([
+		"M",ex,ex-ex/2,
+		"L",ex,ex+ex/2
+	]).attr({'stroke':'#b0b0b0','stroke-dasharray':'- '});
+	allYearsEx.path([
+		"M",ex-ex/2,ex,
+		"L",ex+ex/2,ex
+	]).attr({'stroke':'#b0b0b0','stroke-dasharray':'- '});
+	allYearsEx.text(ex,ex-ex/2,"Income").attr('fill','#b0b0b0');
+	allYearsEx.text(125+125/2+5,125,"Average\nMortgage").attr('fill','#b0b0b0');
+	allYearsEx.text(125,125+125/2-5,"Average\nCanada\nStudent\nLoan").attr('fill','#b0b0b0');
+	allYearsEx.text(125-125/2-10,125,"Tuition").attr('fill','#b0b0b0');
+
+	var allR = 110,
+		allY = -80,
+		spacing = 160,
+		dataCount = 0,
+		newYear = 1976;
+		
+	for(i=0;i<7;i++){ // rows
+		var allX = 120;
+		allY += spacing;
+		
+		for(j=0;j<5;j++){ // columns
+			allYears.path([
+				"M",allX-allR/2,allY,
+				"L",allX+allR/2,allY
+			]).attr('stroke','#b0b0b0');
+			
+			allYears.path([
+				"M",allX,allY-allR/2,
+				"L",allX,allY+allR/2
+			]).attr('stroke','#b0b0b0')
+			
+			var vals = dataPoints[dataCount].data,
+				newVals = [];
+				newVals.push(vals[0]*.2,
+						vals[1]*.2,
+						vals[2]*.2,
+						vals[3]*.2
+						)
+			var newCurve = curve*.2;
+			
+			allBlob = allYears.path([
+				"M",allX,allY-newVals[0],
+    			"C",allX+newCurve,allY-newVals[0],allX+newVals[1],allY-newCurve,allX+newVals[1],allY,
+    			"C",allX+newVals[1],allY+newCurve,allX+newCurve,allY+newVals[2],allX,allY+newVals[2],
+    			"C",allX-newCurve,allY+newVals[2],allX-newVals[3],allY+newCurve,allX-newVals[3],allY,
+    			"C",allX-newVals[3],allY-newCurve,allX-newCurve,allY-newVals[0],allX,allY-newVals[0]
+    		]).attr('opacity','0').animate({opacity:.8},250).attr({'fill':'','opacity':.8,'stroke':'#20586f'});
+			
+			allYears.text(allX,allY-allR/2,newYear).attr('font-size',9);
+		  
+		  allX += spacing;
+		  newYear += 1;
+		  dataCount++;
+		}
+	}
+	*/
+    return chart;
+};
+	var holders = 'income,housing,unemployment,tuition,csl'.split(','),
+		dArr = [income,housing,unemployment,tuition,csl],
+		colors = '#cd3939,#FF6B00,#84999A,#B82EFF,#13B7C6,#5c924d'.split(',');
+
+  
+	// Create line charts
+	var w = 420,
+		h = 200,
+		startX = 60,
+		startY = 40,
+		axis = '0 0 1 1',
+		modTags = true;
+	if($('#gi').width()<620){
+		w = $('#gi').width();
+		h = 200;
+		axis = '0 0 1 0';
+		startX = 0;
+		modTags = false;
+	}
+	
+	var rIncome = Raphael("income-holder"),
+		textattr = { font: "12px sans-serif" },
+		lineattr = { nostroke: false, axis: axis, smooth: true, colors: ['#91bbc9','#be4b48','#98b954','#7d60a0','transparent'] },
+		twoLineAttr = { nostroke: false, axis: axis, smooth: true, colors: ['#91bbc9','#d09999','#91bbc9','transparent'] };
+	var timeline = [];
+	var i = 0;
+	var ten = 1975;
+	while(i<income.length){
+		i++;
+		timeline.push(ten+=1);
+	};
+	var incomeDataFull = [[23400,24500,23200,23600,22300,22700,19300,16600,17300,17000,17800,17600,18000,19800,16300,15500,14200,13600,13200,12900,12200,12000,12700,13500,13500,13900,13900,13400,13700,14000,14300,14200,14200,13700,13800],
+[27000,27000,27300,27100,27000,26900,25600,24200,24200,24800,25500,25700,26900,27900,26700,25400,25400,24900,24800,25000,24300,24400,24900,25800,26100,26900,26800,26700,27000,27300,28000,28800,28700,28900,28700],
+[38700,37700,37300,37500,37900,36000,34000,33100,32700,32800,33300,32800,33100,33100,32200,30700,30700,29400,29800,29400,28000,28400,28900,30100,31500,31500,31700,31100,32100,32000,32700,32900,34400,33300,33600],
+[44100,42100,43700,41100,42100,42200,39300,39000,39000,39400,39800,39600,40400,40600,38700,37600,37700,36000,36700,36300,34900,34800,35600,37100,37000,37500,37200,37200,36700,37000,38200,39400,40000,39900,40100],
+[0,40]];
+    // Add quick color legend
+    rIncome.rect(20,20,10,10).attr({'fill':'#be4b48','stroke':'none'});
+    rIncome.text(35,25,"All ages").attr('text-anchor','start');
+    rIncome.rect(100,20,10,10).attr({'fill':'#91bbc9','stroke':'none'});
+    rIncome.text(115,25,"20-24").attr('text-anchor','start');
+    rIncome.rect(180,20,10,10).attr({'fill':'#98b954','stroke':'none'});
+    rIncome.text(195,25,"25-34").attr('text-anchor','start');
+    rIncome.rect(260,20,10,10).attr({'fill':'#7d60a0','stroke':'none'});
+    rIncome.text(275,25,"35-44").attr('text-anchor','start');
+	rIncomeChart = rIncome.linechart(startX,startY,w,h,timeline,incomeDataFull,lineattr).hoverColumn(function () {
+                    this.tags = rHousing.set();
+					
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(rHousing.tag(this.x, this.y[i], ('$' + addCommas(Math.round(this.values[i]))), 160, 10).insertBefore(this));
+                        this.tags.attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]);
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });
+ 	lineattr = { nostroke: false, axis: axis, smooth: true, colors: ['#91bbc9','transparent'] };
+  
+	 // change the x-axis labels 
+	if(modTags){
+    var axisItems = rIncomeChart.axis[1].text.items
+    for( var i = 0, l = axisItems.length; i < l; i++ ) {
+       //var date = new Date(parseInt(axisItems[i].attr("text")));
+       // using the excellent dateFormat code from Steve Levithan
+       axisItems[i].attr({"text": "$" + addCommas(parseInt(axisItems[i].attr("text"))),"fill":"#999999"});
+       
+    }
+    }
+    
+    var tag;
+	var rHousing = Raphael("housing-holder");
+    // Get interest to fit on housing chart
+    var newInterest = [];
+    $.each(interestMortgage, function(i,d){
+    	newInterest.push(d*20000);
+    })
+    var eachVal = 11.78/8,
+    	eachSpace = 200/9;
+    // Add second axis
+    for(i=0;i<9;i++){
+    	rHousing.text(478,230-(eachSpace*i),(eachVal*i).toFixed(1)+'%').attr({'text-anchor':'start','fill':'#d09999'});
+    	rHousing.rect(470,230-(eachSpace*i),5,1).attr({'fill':'black','stroke':'none'});
+    }
+    	if($('#gi').width()>620){
+    // Add second axis line
+    rHousing.rect(470,50,1,180).attr({'fill':'black','stroke':'none'});
+    // Add quick color legend
+    rHousing.rect(20,20,10,10).attr({'fill':'#91bbc9','stroke':'none'});
+    rHousing.text(35,25,"Average mortgage").attr('text-anchor','start');
+    rHousing.rect(140,20,10,10).attr({'fill':'#d09999','stroke':'none'});
+    rHousing.text(155,25,"Interest rate on 5-year mortgage").attr('text-anchor','start');
+    }
+    	var rHousingChart = rHousing.linechart(startX,startY,w,h,timeline,[housing,newInterest,housing,[0,40]], twoLineAttr).hoverColumn(function () {
+                    this.tags = rHousing.set();
+					
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(rHousing.tag(this.x, this.y[i], ('$' + addCommas(Math.round(this.values[i]))), 160, 10).insertBefore(this));
+                        this.tags.attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]);
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });
+    if(modTags){
+
+	var axisItems = rHousingChart.axis[1].text.items
+    for( var i = 0, l = axisItems.length; i < l; i++ ) {
+           axisItems[i].attr({"text": "$" + addCommas(parseInt(axisItems[i].attr("text"))),"fill":"#999999"});
+    }
+    }
+    lineattr = { nostroke: false, axis: '0 0 1 0', smooth: true, colors: ['#91bbc9','transparent'] };
+
+	var rUnemployment = Raphael("unemployment-holder");
+	var rUnemploymentChart = rUnemployment.linechart(startX,startY,w,h,timeline,[unemployment,[0,13]], lineattr).hoverColumn(function () {
+                    this.tags = rHousing.set();
+					
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(rHousing.tag(this.x, this.y[i], (this.values[i] + '%'), 160, 10).insertBefore(this));
+                        this.tags.attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]);
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });
+    var eachVal = 12/8,
+    	eachSpace = 190/9;
+  	if($('#gi').width()>620){
+    // Add second axis
+    for(i=0;i<9;i++){
+    	rUnemployment.text(62,230-(eachSpace*i),(eachVal*i).toFixed(1)+'%').attr({'text-anchor':'end','fill':'#999999'});
+    	rUnemployment.rect(64,230-(eachSpace*i),5,1).attr({'fill':'black','stroke':'none'});
+    }
+    // Add second axis line
+    rUnemployment.rect(69,50,1,180).attr({'fill':'black','stroke':'none'});	
+	}
+	lineattr = { nostroke: false, axis: axis, smooth: true, colors: ['#91bbc9','transparent'] };
+    
+		var rTuition = Raphael("tuition-holder");
+	var rTuitionChart = rTuition.linechart(startX,startY,w,h,timeline,[tuition,[0,13]],lineattr).hoverColumn(function () {
+                    this.tags = rHousing.set();
+					
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(rHousing.tag(this.x, this.y[i], ('$' + addCommas(Math.round(this.values[i]))), 160, 10).insertBefore(this));
+                        this.tags.attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]);
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });
+    
+	if(modTags){
+	var axisItems = rTuitionChart.axis[1].text.items
+    for( var i = 0, l = axisItems.length; i < l; i++ ) {
+       //var date = new Date(parseInt(axisItems[i].attr("text")));
+       // using the excellent dateFormat code from Steve Levithan
+       axisItems[i].attr({"text": "$" + addCommas(parseInt(axisItems[i].attr("text"))),"fill":"#999999"});
+    }
+    }
+
+	var rCsl = Raphael("csl-holder");
+	var rCslChart = rCsl.linechart(startX,startY,w,h,timeline,[csl,[0,13]],lineattr).hoverColumn(function () {
+                    this.tags = rHousing.set();
+					
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(rHousing.tag(this.x, this.y[i], ('$' + addCommas(Math.round(this.values[i]))), 160, 10).insertBefore(this));
+                        this.tags.attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]);
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });;
+	if(modTags){
+	var axisItems = rCslChart.axis[1].text.items
+    for( var i = 0, l = axisItems.length; i < l; i++ ) {
+       //var date = new Date(parseInt(axisItems[i].attr("text")));
+       // using the excellent dateFormat code from Steve Levithan
+       axisItems[i].attr({"text": "$" + addCommas(parseInt(axisItems[i].attr("text"))),"fill":"#999999"});
+    }
+    }
+    var labels = 1976;
+    var year = 1976,
+    	cx = 310,
+    	cy = 280,
+    	r = 200;
+	if($('#gi').width() < 620){
+		cx = $('#gi').width()/2;
+    	cy = $('#holder').height()/2;
+    	r = $('#gi').width()/4;
+	}
+
+$('#teaser .gi-button a').click(function(){
+	$('#teaser').fadeOut(function(){
+		$('#gi-viz-all').css({'display':'none','height':'100%'}).fadeIn();
+	});
+	return false;
+})
+
+    Raphael("holder", 620, 565).donutChart(cx, cy, r, r, income, labels, "#ececec");
+
+})
+</script>
+<div id="gi">
+<!--<img src="globe.png" />
+<div id="nav">
+	<div class="tab"><a class="selected" href="#thenandnow">Then and now</a></div>
+	<div class="tab"><a href="#allindicators">All indicators</a></div>
+	<div class="tab"><a href="#allyears">All years</a></div>
+	<div class="tab"><a href="#income">Income</a></div>
+	<div class="tab"><a href="#housing">Housing</a></div>
+	<div class="tab"><a href="#taxes">Taxes</a></div>
+	<div class="tab"><a href="#jobs">Jobs</a></div>
+</div>
+-->
+<!-- 
+<div id="gi-header-all">
+	<h1 class="gi-header"><span>What year did you graduate?</span></h1>
+	<div class="input-wrap">
+		<div class="input-box"><input type="text" value="1976" /></div>
+		<div class="input-submit"><a href="#go">Go</a></div>
+		<div class="input-response">Sorry, we only have data going back to 1976.</div>
+	</div>
+</div>
+	<hr />
+-->
+<style type="text/css">
+#teaser{
+	width:100%;
+	height:250px;
+	text-align:center;
+}
+#teaser .slider-container{
+	margin-left:300px;
+	text-align: center;
+	width:300px;
+}
+.gi-button{
+	float:left;
+	width:100%;
+	clear:both;
+	margin-top:30px;
+}
+#slider-all{
+
+}
+#teaser .slider-year{
+	float:left;
+	width:300px;
+	font-size:40px;
+	text-align:center;
+	position: relative;
+}
+.gi-button a{
+	padding:10px 30px;
+	background-color:#d60000;
+	color:white;
+	font-family:"PrattHeavy",sans-serif;
+	border-radius:5px;
+	font-size:14px;
+	text-decoration: none;
+}
+#gi-viz-all{
+height:0;
+position: relative;
+overflow:hidden;
+width: 100%;
+margin-top:40px;
+}
+
+.tale h4{
+	font-family:"PrattHeavy",sans-serif;
+	font-weight:normal;
+	margin-bottom:0px;
+	padding-bottom:0px;
+}
+</style>
+<div id="gi-timemachine"><img src="Time_Machine.png" /></div>
+<h2 id="gi-headline">The<br /><span>Who Had It Worse</span><br />Time Machine</h2>
+<div class="gi-text">
+Use this tool to travel back in time and compare the financial situation for today's young people to the past 30 years. Who had it worse? Tell us your story in the comments.
+</div>
+<style>
+#gi-timemachine{
+	float:right;
+	margin-right:80px;
+}
+.slider-tic-val div{
+	background-color:black;
+	color:white;
+	float:left;
+	padding:5px;
+	font-size:38px;
+	font-family"PrattHeavy",sans-serif;
+	margin-right:2px;
+	width:50px;
+	text-align:center;
+}
+.slider-tic-val{
+	margin:0 auto;
+	margin-left:31px;	
+}
+#gi-headline{
+	font-size:28px !important;
+	text-align:left;
+	line-height:1;
+	font-weight:normal;
+	font-family:"PrattRegular",Georgia,sans-serif;
+	letter-spacing: .5px;
+	margin-bottom:10px;
+	width:600px;
+	text-transform:uppercase;
+}
+#gi-headline span{
+	font-size:48px;
+	color:#ce322d;
+	text-transform:none !important;
+}
+.gi-text{
+width: 500px;
+font-size: 16px;
+line-height: 2;
+font-family: "PrattRegular",sans-serif;
+text-align: left;
+padding-bottom: 30px;
+padding-top:20px;
+}
+.slide{
+border-top: 1px solid #ececec;
+}
+</style>
+	<div id="teaser">
+		<div class="slider-container">
+			<div class="slider-tip" style="padding-bottom:5px">Click and drag to your graduating year</div>
+			<div id="slider-all"></div>
+			<div style="clear:both;height:10px"></div>
+			<div class="slider-tic-val"><div>2</div><div>0</div><div>1</div><div>0</div></div>
+			<div class="gi-button"><a href="#">GO</a></div>
+		</div>
+	</div>
+	
+<div id="gi-viz-all">
+	<div id="slides">
+	  <div class="slide selected">
+	  <h2>You had it <span class="worsebetter">the same as</span> 1976</h2>
+ 			<div class="slider-container">
+				<div class="slider-year slider-year-val">1976</div>
+				<div id="slider"></div>
+    	    </div> 	    
+	  <div id="holder-container">
+		<div id="blob-legend">
+			<div class="legend-square"><div id="mainblob-legend"></div><span class="slider-year-val">1976</span></div>
+			<div class="legend-square"><div id="underblob-legend"></div><span class="">1976</span></div>
+		</div>
+
+        <div id="holder"></div>
+        <div class="holder-nav" id="nav-top">Median income<br /><span class="slider-income-val"></span></div>
+        <div class="holder-nav" id="nav-right">Average<br />housing price<br /><span class="slider-mortgage-val"></span></div>
+        <div class="holder-nav" id="nav-bottom">Average Canada Student Loan<br /><span class="slider-incometax-val"></span></div>
+        <div class="holder-nav" id="nav-left">Average tuition<br /><span class="slider-tuition-val"></span></div>
+      </div><!-- holder-container -->
+      
+		<div class="tale">
+			<p>The graphic on the right shows how you compare to the graduating class of 1976. Your year is in blue. A tall, narrow blob is the best scenario: higher income with lower costs elsewhere. But today's graduating class has exactly the opposite: lower income with higher tuition, loans and housing prices.</p>
+			<div id="better-worse">
+			<table><tr><td>
+			Income</td><td><span id="income-updown">You had the same</span>
+			</td></tr><tr><td>
+			Housing price</td><td><span id="housing-updown">You had the same</span>
+			</td></tr><tr><td>
+			Tuition</td><td><span id="tuition-updown">You had the same</span>
+			</td></tr><tr><td>
+			Student loans</td><td><span id="loan-updown">You had the same</span>
+			</td></tr>
+			</table>
+<style>
+.gi-share{
+	padding:10px 0 0;
+	float:left;
+	width:100%;
+}
+.gi-share div{
+	float:left;
+	line-height:2.5;
+}
+</style>
+			<div class="gi-share">
+				<div style="font-size:9px;text-transform:uppercase;padding-right:10px;">Share your results</div><div><iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?text=See%20why%20today's%20young%20people%20have%20it%20worse%20than%2030%20years%20ago.&url=http://stuartathompson.com/&via=globeandmail" style="width:80px; height:21px;"></iframe></div>
+			</div>
+			</div>
+		</div>
+	  
+
+	  </div>
+
+<div class="slide">
+	
+	<h2>Income <a href="#"><img src="q.png" alt="Total median income for people 20-24 in 2010 constant dollars. (Other age groups also included on the right.)<Br />Source: Statistics Canada" /></a></h2>
+
+	<div class="tale">
+		<p>This chart shows total median income for young adults in constant 2010 dollars. This is a way of comparing the purchasing power in previous years to 2010, which is the most recent year for which Statistics Canada has data.
+		<p>Yes, people in the 20-24 age bracket do have significantly less purchasing power today than they did 30 years ago. Part of the explanation is that more young people are going to college and university and thus not generating significant earnings. Other explanations include declining wage growth and comparatively high youth unemployment.
+			
+	</div>
+
+	<div class="linechart" id="income-holder"></div>
+
+</div>
+
+<div class="slide">
+		<h2>Housing and mortgages <a href="#"><img src="q.png" alt="Canada-wide average housing price, constant 2010 dollars, and five year interest rates for mortgages, averaged per year. <Br />Sources: Canada Real Estate Association and the Bank of Canada" /></a></h2>
+
+	<div class="tale">	
+		<p>House prices have soared since the late 1990s, which means first-time homebuyers must save more for down-payments and take on larger mortgages. Here, the average mortgage housing price is plotted against the average yearly interest rate for five-year mortgages. These declining interest rates for mortgages has helped with affordability.
+	</div>
+	<div class="linechart" id="housing-holder"></div>
+
+</div>
+
+<div class="slide">
+
+	<h2>Unemployment <a href="#"><img src="q.png" alt="Unemployment rate for 15- to 24-year-olds.<Br />Source: Statistics Canada" /></a></h2>
+
+	<div class="tale">
+		<p>The jobless rate for the 15- to 24-year-old age bracket is shown here. A higher unemployment rate means worse employment prospects, particularly for young people just graduating from post-secondary programs.
+		<p>Historically, the unemployment rate has risen and fallen in a cyclical pattern. We're not at the highs seen in past recessions, but the trend looks negative.
+	</div>	
+	<div class="linechart" id="unemployment-holder"></div>
+
+</div>
+
+<div class="slide">
+	
+	<h2>Tuition <a href="#"><img src="q.png" alt="Weighted average tuition cost, constant 2010 dollars.<Br />Source: Statistics Canada" /></a></h2>
+<div class="tale">
+		<p>The latest numbers from Statistics Canada show post-secondary tuition costs rose by 5 per cent on a year-over-year basis, while the consumer price index &mdash; a basket of everyday goods and services &mdash; rose by 1.3 per cent. Tuition fees have been rising steeply for more than two decades. If you were a student in the 1980s or earlier, you were fortunate.
+	</div>
+	<div class="linechart" id="tuition-holder"></div>
+
+</div>
+
+
+<div class="slide">
+	
+	<h2>Canada Student Loans <a href="#"><img src="q.png" alt="Average Canada Student Loans, constant 2010 dollars, participating provinces (does not include Quebec, NWT or Nunavut).<Br />Source: Human Resources and Skills Development Canada" /></a></h2>
+<div class="tale">
+		<p>This shows the average amount borrowed for full-time students through the government student loan program, as opposed to student lines of credit offered by banks. As tuitions rise, students must borrow more.			
+	</div>
+	<div class="linechart" id="csl-holder"></div>
+
+</div>
+
+<div class="slide" style="padding-bottom:200px">
+	<h2>Conclusion</h2>
+	<p>We expect tuition costs, student borrowing and housing costs to go up over time. That's natural. The surprise here is the way in which the purchasing power of young adults has shrunk. All these factors together suggest today's young adults have it worse.</p>
+</div>
+
+
+<!--
+	  <div class="slide">
+	  <h2>All indicators</h2>
+		  <div class="slider-container">
+    	    	<div class="slider-tip">Click and drag to your graduating year</div>
+				<div class="year">1976</div>
+				<div id="slider-all"></div>
+    	    </div>
+    	 <div style="clear:both"></div>
+		<div class="tale-footer">
+    	    <div id="compare-val-1" class="compare">
+    	    	<h2>Median Income</h2>
+    	    	<h3>24 years and under</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:86.18px">$33,100</div><div class="shadowbar val1">$33,100</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2" style="width:15px">$23,400</div><div class="shadowbar">$23,400</div></div>
+    	    </div>
+    	    <div id="compare-val-2" class="compare">
+    	    	<h2>Average Housing Price</h2>
+    	    	<h3>Resale price</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:46.9px">$50,807</div><div class="shadowbar val1">$50,807</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2">$320,447</div><div class="shadowbar val2">$320,447</div></div>
+    	    </div>
+    	    <div id="compare-val-3" class="compare">
+    	    	<h2>Income Tax</h2>
+    	    	<h3>Federal and provincial</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:101.8px">50.9%</div><div class="shadowbar val1">50.9%</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2" style="width:44.4px">22.2%</div><div class="shadowbar val2">22.2%</div></div>
+    	    </div>
+    	    <div id="compare-val-4" class="compare">
+    	    	<h2>Tuition</h2>
+    	    	<h3>National average</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:30.6px">$564</div><div class="shadowbar val1">$564</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2" style="width:139.8px">$4,747</div><div class="shadowbar val2">$4,747</div></div>
+    	    </div>
+		</div>
+		
+		<div class="tale-footer">
+    	    <div id="compare-val-5" class="compare">
+    	    	<h2>Unemployment rate</h2>
+    	    	<h3>24 years and under</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:49.8px;">7%</div><div class="shadowbar val1">7%</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2" style="width:71.40000000000002px;">8%</div><div class="shadowbar">8%</div></div>
+    	    </div>
+    	    <div id="compare-val-7" class="compare">
+    	    	<h2>Interest rates (mortgage)</h2>
+    	    	<h3>5-year residential lending rate</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:30px">$1023.58</div><div class="shadowbar val1">$1023.58</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2">$5,687</div><div class="shadowbar val2" style="width: 137.56014112662098px;">$5,687</div></div>
+    	    </div>
+    	    <div id="compare-val-8" class="compare">
+    	    	<h2>Minimum wage</h2>
+    	    	<h3>National average</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:49.8px;">7%</div><div class="shadowbar val1">7%</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2" style="width:71.40000000000002px;">8%</div><div class="shadowbar">8%</div></div>
+    	    </div>
+    	    <div id="compare-val-6" class="compare">
+    	    	<h2>Canada student loans</h2>
+    	    	<h3>National average</h3>
+    	    	<div class="before"><div class="label">1976</div><div class="bar val1" style="width:30px">$1023.58</div><div class="shadowbar val1">$1023.58</div></div>
+    	    	<div class="after"><div class="label">2011</div><div class="bar val2">$5,687</div><div class="shadowbar val2" style="width: 137.56014112662098px;">$5,687</div></div>
+    	    </div>
+		</div>
+			  
+	  </div>
+	  -->
+<!--	  <div class="slide">
+		<h2>Year by year</h2>
+		<div id="holder-all-ex"></div>
+		<p>Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
+			<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+
+		<div id="holder-years">
+		
+		</div>
+	  </div>
+-->	  </div>
+	</div>
+	</div>
+</div>
