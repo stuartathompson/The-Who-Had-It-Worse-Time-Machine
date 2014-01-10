@@ -4,7 +4,9 @@ The Who Had It Worse Time Machine
 An interactive showing how today’s young adults face serious challenges in the form of high and rising tuition fees, a tough job market and high housing prices
 
 Coding, design, layout and data work by Stuart A. Thompson
+
 Writing by Rob Carrick
+
 Time Machine graphic by Murat Yukselir
 
 See the full version here: http://www.theglobeandmail.com/globe-investor/personal-finance/household-finances/proof-that-young-adults-have-it-worse-much-worse-than-30-years-ago/article10280516/
